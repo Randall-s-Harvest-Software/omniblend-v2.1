@@ -1,0 +1,10 @@
+<svg width="390" height="480" viewBox="0 0 390 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="390" height="480" fill="#1a1a1a"/>
+  <rect x="50" y="100" width="290" height="280" fill="#2a2a2a" stroke="#4C9B1D" strokeWidth="2" strokeDasharray="10,5"/>
+  <circle cx="195" cy="200" r="40" fill="#4C9B1D"/>
+  <path d="M175 200 L195 180 L215 200 L195 220 Z" fill="#1a1a1a"/>
+  <text x="195" y="280" text-anchor="middle" fill="#4C9B1D" font-family="Arial, sans-serif" font-size="16" font-weight="bold">OMNIBLEND</text>
+  <text x="195" y="310" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="12">Premium Spice Blend</text>
+  <circle cx="195" cy="350" r="30" fill="none" stroke="#4C9B1D" strokeWidth="2"/>
+  <path d="M185 350 L205 350 M195 340 L195 360" stroke="#4C9B1D" strokeWidth="2"/>
+</svg>
