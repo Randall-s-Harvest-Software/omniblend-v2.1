@@ -42,7 +42,7 @@ const Register = () => {
             <Navbar />
 
             {/* Main Register Section */}
-            <section className="flex justify-center items-center py-0 lg:py-40">
+            <section className="flex justify-center items-center py-24 lg:py-40">
                 <div className="w-full max-w-[1500px] flex flex-col lg:flex-row gap-24">
                     {/* Left Section - Information */}
                     <div className="w-full lg:w-[60%] bg-transparent animate-float-y rounded-xl shadow-lg flex flex-col items-center justify-center px-12 py-10 space-y-4 leading-[1.5rem]">
@@ -53,7 +53,7 @@ const Register = () => {
                     </div>
 
                     {/* Right Section - Registration Form */}
-                    <div className="lg:w-[1400px] h-auto bg-black/70 rounded-xl shadow-lg px-12 py-10 flex flex-col items-center leading-10">
+                    <div className="lg:w-[1400px] w-[370px] h-auto bg-black/70 rounded-xl shadow-lg px-12 py-10 flex flex-col items-center leading-10 mx-auto lg:mx-0">
                         <h1 className="text-white text-3xl font-bold mb-2 font-andika">Join Us</h1>
                         <p className="text-gray-300 text-lg mb-7 font-andika text-center">Create your account and start your journey with us.</p>
 

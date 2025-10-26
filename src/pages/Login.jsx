@@ -51,8 +51,8 @@ const Login = () => {
             <Navbar />
 
             {/* Main Login Section */}
-            <section className="flex justify-center items-center py-0 lg:py-44">
-                <div className="w-[786px] h-[800px] bg-black/50 rounded-xl shadow-lg flex flex-col items-center justify-center px-12">
+            <section className="flex justify-center items-center py-24 lg:py-44">
+                <div className="w-[370px] md:w-[786px] h-[800px] bg-black/50 rounded-xl shadow-lg flex flex-col items-center justify-center px-12">
                     <h1 className="text-white font-andika text-3xl font-bold mb-6 animate-float-y">Welcome back</h1>
                     <p className="text-gray-300 text-lg font-andika mb-14 animate-float-y">Please enter your details</p>
                     <p className="text-gray-400 text-sm font-andika mb-4 text-center">Admin Access: omniblend@admin.com / 12345</p>

@@ -39,20 +39,20 @@ const Contact = () => {
             <Navbar />
 
             {/* Main Contact Section - Fixed height to fit in one screen */}
-            <div className="flex flex-col items-center justify-between px-4" style={{ height: 'calc(100vh - 120px - 250px)' }}>
+            <div className="flex flex-col items-center justify-between px-4 py-8 md:py-0" style={{ minHeight: 'calc(100vh - 120px - 250px)' }}>
                 {/* Contact Us Heading */}
-                <div className="mb-4 mt-36">
-                    <h1 className="text-white font-pethra text-[54px] leading-tight text-center underline decoration-2 underline-offset-8">
+                <div className="mb-8 md:mb-4 mt-16 md:mt-36">
+                    <h1 className="text-white font-pethra text-4xl md:text-[54px] leading-tight text-center underline decoration-2 underline-offset-8">
                         Contact Us
                     </h1>
                 </div>
 
                 {/* Two Main Sections with Line Between */}
-                <div className="w-[1920px] flex items-center justify-center gap-16 flex-1">
+                <div className="w-full max-w-7xl flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 flex-1 px-4">
                     {/* Left Section - Send Message */}
-                    <div className="w-[1000px] h-[445px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex flex-col items-center px-8 py-12">
+                    <div className="w-full md:w-[1000px] h-auto md:h-[500px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex flex-col items-center p-6 md:px-8 md:py-12">
                         {/* Name and Email Row */}
-                        <div className="flex items-center justify-between gap-8 mb-12 w-full">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 mb-8 md:mb-14 w-full">
                             {/* Full Name Input */}
                             <input
                                 type="text"
@@ -60,7 +60,7 @@ const Contact = () => {
                                 value={formData.fullName}
                                 onChange={handleInputChange}
                                 placeholder="Enter full name"
-                                className="w-[450px] h-[40px] bg-black/30 backdrop-blur-[8px] border border-white/20 rounded-xl px-4 text-white font-afacad font-normal text-[16px] placeholder-white/70"
+                                className="w-full md:w-[450px] h-[40px] bg-black/30 backdrop-blur-[8px] border border-white/20 rounded-xl px-4 text-white font-afacad font-normal text-[16px] placeholder-white/70"
                                 style={{fontFamily: 'Afacad, sans-serif'}}
                             />
 
@@ -71,7 +71,7 @@ const Contact = () => {
                                 value={formData.email}
                                 onChange={handleInputChange}
                                 placeholder="Email address"
-                                className="w-[450px] h-[40px] bg-black/30 backdrop-blur-[8px] border border-white/20 rounded-xl px-4 text-white font-afacad font-normal text-[16px] placeholder-white/70"
+                                className="w-full md:w-[450px] h-[40px] bg-black/30 backdrop-blur-[8px] border border-white/20 rounded-xl px-4 text-white font-afacad font-normal text-[16px] placeholder-white/70"
                                 style={{fontFamily: 'Afacad, sans-serif'}}
                             />
                         </div>
@@ -83,7 +83,7 @@ const Contact = () => {
                             value={formData.subject}
                             onChange={handleInputChange}
                             placeholder="Subject"
-                            className="w-[935px] h-[40px] bg-black/30 backdrop-blur-[8px] border border-white/20 rounded-xl px-4 text-white font-afacad font-normal text-[16px] placeholder-white/70 mb-12"
+                            className="w-full md:w-[935px] h-[40px] bg-black/30 backdrop-blur-[8px] border border-white/20 rounded-xl px-4 text-white font-afacad font-normal text-[16px] placeholder-white/70 mb-8 md:mb-14"
                             style={{fontFamily: 'Afacad, sans-serif'}}
                         />
 
@@ -94,7 +94,7 @@ const Contact = () => {
                             onChange={handleInputChange}
                             placeholder="Message"
                             rows="3"
-                            className="w-[935px] h-[90px] bg-black/30 backdrop-blur-[8px] border border-white/20 rounded-xl px-4 py-3 text-white font-afacad font-normal text-[16px] placeholder-white/70 mb-12 resize-none"
+                            className="w-full md:w-[935px] h-[120px] md:h-[90px] bg-black/30 backdrop-blur-[8px] border border-white/20 rounded-xl px-4 py-3 text-white font-afacad font-normal text-[16px] placeholder-white/70 mb-8 md:mb-14 resize-none"
                             style={{fontFamily: 'Afacad, sans-serif'}}
                         ></textarea>
 
@@ -109,11 +109,16 @@ const Contact = () => {
                         </button>
                     </div>
 
-                    {/* Vertical Line Between Sections */}
-                    <div className="w-[1px] h-[445px] bg-white/20"></div>
+                    {/* Horizontal Line - Visible only on mobile */}
+                    <div className="w-full h-[3px] bg-white/40 my-8 md:hidden"></div>
+                    
+                    {/* Vertical Line Between Sections - Visible only on desktop */}
+                    <div className="hidden md:flex items-center justify-center">
+                        <div className="w-0.5 h-[445px] bg-white/40"></div>
+                    </div>
 
                     {/* Right Section - Get in Touch */}
-                    <div className="w-[380px] h-[445px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex flex-col  px-8 py-8">
+                    <div className="w-full md:w-[380px] h-auto md:h-[500px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex flex-col p-6 md:px-8 md:py-8">
                         {/* Get in Touch Heading */}
                         <div className="mb-6">
                             <h2 className="text-white underline underline-offset-4 decoration-1 font-afacad font-bold text-[27px] flex justify-center  leading-tight" style={{fontFamily: 'Afacad, sans-serif'}}>
@@ -182,15 +187,15 @@ const Contact = () => {
                             </div>
                         </div>
 
-                        {/* White Box */}
-                        <div className="w-[300px] h-[125px] bg-white rounded-[10px] shadow-lg flex items-center justify-center">
+                        {/* White Box - Hidden on mobile */}
+                        <div className=" w-full max-w-[300px] h-[125px] bg-white rounded-[10px] shadow-lg items-center justify-center mt-4 mx-auto">
                             {/* Empty white box as specified */}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="relative top-[75px]">
+            <div className="relative mt-16 md:mt-6 md:top-[75px]">
                 <Bottom />
             </div>
 

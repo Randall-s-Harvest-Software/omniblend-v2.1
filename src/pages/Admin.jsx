@@ -9,6 +9,7 @@ const Admin = () => {
     const [activeSection, setActiveSection] = useState('dashboard');
     const [showAddModal, setShowAddModal] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const [newProduct, setNewProduct] = useState({
         name: '',
         price: '',
@@ -71,7 +72,7 @@ const Admin = () => {
     const Dashboard = () => (
         <div className="space-y-6">
             <h2 className="text-2xl font-bold text-white mb-6">Dashboard Overview</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-xl p-6">
                     <h3 className="text-lg font-semibold text-white mb-2">Total Users</h3>
                     <p className="text-3xl font-bold text-[#4C9B1D]">1,247</p>
@@ -98,21 +99,21 @@ const Admin = () => {
 
     const Products = () => (
         <div className="space-y-6">
-            <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-white">Product Management</h2>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <h2 className="text-xl sm:text-2xl font-bold text-white">Product Management</h2>
                 <button
                     onClick={() => {
                         setEditingProduct(null);
                         setNewProduct({ name: '', price: '', category: '', description: '', tagline: '', image: '', status: 'active' });
                         setShowAddModal(true);
                     }}
-                    className="bg-[#4C9B1D] text-white px-4 py-2 rounded-md hover:bg-[#3A7B1A] transition"
+                    className="w-full sm:w-auto bg-[#4C9B1D] text-white px-4 py-2 rounded-md hover:bg-[#3A7B1A] transition text-sm sm:text-base"
                 >
                     Add New Product
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {products.map((product) => (
                     <div key={product.id} className="bg-black/30 rounded-lg p-4 border border-white/10">
                         <div className="flex justify-between items-start mb-3">
@@ -150,8 +151,8 @@ const Admin = () => {
 
             {/* Add/Edit Product Modal */}
             {showAddModal && (
-                <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-                    <div className="bg-black/90 rounded-xl p-6 w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto">
+                <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+                    <div className="bg-black/90 rounded-xl p-4 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
                         <h3 className="text-xl font-bold text-white mb-4">
                             {editingProduct ? 'Edit Product' : 'Add New Product'}
                         </h3>
@@ -248,17 +249,17 @@ const Admin = () => {
                                 </select>
                             </div>
 
-                            <div className="flex gap-3 pt-4">
+                            <div className="flex flex-col sm:flex-row justify-end gap-3 mt-6">
                                 <button
                                     type="button"
                                     onClick={() => setShowAddModal(false)}
-                                    className="flex-1 bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 transition"
+                                    className="px-4 py-2 text-sm text-gray-300 hover:text-white border border-gray-600 rounded-md"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 bg-[#4C9B1D] text-white py-2 rounded-md hover:bg-[#3A7B1A] transition"
+                                    className="px-4 py-2 bg-[#4C9B1D] text-white rounded-md hover:bg-[#3A7B1A] transition text-sm sm:text-base"
                                 >
                                     {editingProduct ? 'Update' : 'Add'} Product
                                 </button>
@@ -371,13 +372,74 @@ const Admin = () => {
     };
 
     return (
-        <div className="min-h-screen bg-black relative" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(/Loginbg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
-            <Navbar />
+        <div className="min-h-screen bg-black relative" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9))'}}>
+            {/* Mobile Header */}
+            <div className="lg:hidden fixed top-0 left-0 right-0 bg-black/90 border-b border-white/10 p-4 z-20 flex justify-between items-center">
+                <button 
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                    className="text-white p-2"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <h1 className="text-xl font-bold text-white">Admin Panel</h1>
+                <div className="w-6"></div> {/* Spacer for alignment */}
+            </div>
 
-            <div className="pt-32 px-8 pb-8">
+            {/* Mobile Sidebar Overlay */}
+            {sidebarOpen && (
+                <div 
+                    className="fixed inset-0 bg-black/80 z-30 lg:hidden"
+                    onClick={() => setSidebarOpen(false)}
+                ></div>
+            )}
+
+            {/* Sidebar */}
+            <div className={`fixed left-0 top-0 h-full w-64 bg-black/90 border-r border-white/10 p-6 z-40 transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:block`}>
+                <h1 className="text-2xl font-bold text-white mb-10">Admin Panel</h1>
+                <nav className="space-y-2">
+                    <button
+                        onClick={() => {
+                            setActiveSection('dashboard');
+                            setSidebarOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-3 rounded-lg transition ${activeSection === 'dashboard' ? 'bg-[#4C9B1D] text-white' : 'text-gray-300 hover:bg-white/5'}`}
+                    >
+                        Dashboard
+                    </button>
+                    <button
+                        onClick={() => {
+                            setActiveSection('products');
+                            setSidebarOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-3 rounded-lg transition ${activeSection === 'products' ? 'bg-[#4C9B1D] text-white' : 'text-gray-300 hover:bg-white/5'}`}
+                    >
+                        Products
+                    </button>
+                    <button
+                        onClick={() => {
+                            setActiveSection('orders');
+                            setSidebarOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-3 rounded-lg transition ${activeSection === 'orders' ? 'bg-[#4C9B1D] text-white' : 'text-gray-300 hover:bg-white/5'}`}
+                    >
+                        Orders
+                    </button>
+                    <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/10 transition mt-6"
+                    >
+                        Logout
+                    </button>
+                </nav>
+            </div>
+
+            {/* Main Content */}
+            <div className="pt-32 px-8 pb-8 lg:pl-64">
                 <div className="max-w-7xl mx-auto">
                     {/* Admin Header */}
-                    <div className="flex justify-between items-center mb-8">
+                    <div className="hidden lg:flex justify-between items-center mb-8">
                         <h1 className="text-3xl font-bold text-white">Admin Panel</h1>
                         <button
                             onClick={handleLogout}
@@ -388,34 +450,6 @@ const Admin = () => {
                     </div>
 
                     <div className="flex gap-8">
-                        {/* Sidebar */}
-                        <div className="w-64 space-y-2">
-                            <button
-                                onClick={() => setActiveSection('dashboard')}
-                                className={`w-full text-left p-3 rounded-lg transition ${activeSection === 'dashboard' ? 'bg-[#4C9B1D] text-white' : 'text-gray-300 hover:bg-white/10'}`}
-                            >
-                                📊 Dashboard
-                            </button>
-                            <button
-                                onClick={() => setActiveSection('users')}
-                                className={`w-full text-left p-3 rounded-lg transition ${activeSection === 'users' ? 'bg-[#4C9B1D] text-white' : 'text-gray-300 hover:bg-white/10'}`}
-                            >
-                                👥 Users
-                            </button>
-                            <button
-                                onClick={() => setActiveSection('products')}
-                                className={`w-full text-left p-3 rounded-lg transition ${activeSection === 'products' ? 'bg-[#4C9B1D] text-white' : 'text-gray-300 hover:bg-white/10'}`}
-                            >
-                                📦 Products
-                            </button>
-                            <button
-                                onClick={() => setActiveSection('orders')}
-                                className={`w-full text-left p-3 rounded-lg transition ${activeSection === 'orders' ? 'bg-[#4C9B1D] text-white' : 'text-gray-300 hover:bg-white/10'}`}
-                            >
-                                🛒 Orders
-                            </button>
-                        </div>
-
                         {/* Main Content */}
                         <div className="flex-1">
                             {renderContent()}
