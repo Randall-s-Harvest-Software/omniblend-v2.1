@@ -14,7 +14,7 @@ const Landing = () => {
 
     return (
         <motion.section
-            className="min-h-screen w-full flex flex-col text-white relative overflow-hidden bg-[url('/homem.jpg')] bg-cover bg-center md:bg-[url('/homew.jpg')]"
+            className="min-h-screen w-full flex flex-col text-white relative overflow-hidden bg-[url('/homem.webp')] bg-cover bg-center md:bg-[url('/homew.webp')]"
             style={{
                 // keep a dark fallback gradient under the images
                 backgroundColor: '#571111',
