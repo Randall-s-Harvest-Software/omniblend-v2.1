@@ -75,32 +75,31 @@ const Buy = () => {
             <Navbar />
 
             {/* Main Buy Section */}
-            <div className="pt-56 flex flex-row items-start justify-center px-4 min-h-screen gap-44">
+            <div className="pt-32 md:pt-56 flex flex-col md:flex-row items-center md:items-start justify-center px-4 md:px-8 lg:px-4 min-h-screen gap-8 md:gap-16 lg:gap-44">
                 {/* Section 1 - Product Display */}
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center w-full md:w-auto">
                     {/* Big Glassmorphism Box */}
-                    <div className="w-[530px] h-[530px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-center justify-center px-6 py-6 mb-8">
+                    <div className="w-full max-w-[360px] md:w-[530px] h-[400px] md:h-[530px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-center justify-center p-4 md:p-6 mb-6 md:mb-8">
                         {/* Inner White Box */}
-                        <div className="w-[360px] h-[450px] bg-white rounded-2xl shadow-lg flex items-center justify-center overflow-hidden">
-                            {console.log('Main display showing:', variants[selectedVariant]?.image, 'Selected variant:', selectedVariant)}
+                        <div className="w-full h-full max-w-[320px] md:w-[360px] md:h-[450px] bg-white rounded-2xl shadow-lg flex items-center justify-center overflow-hidden">
                             <img
                                 src={variants[selectedVariant].image}
                                 alt={`Omniblend ${variants[selectedVariant].name} - ${selectedProduct?.name || 'Premium Spice Blend'} Product`}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-contain p-2 md:p-0"
                             />
                         </div>
                     </div>
 
                     {/* 4 Small Glassmorphism Boxes Row */}
-                    <div className="flex items-center justify-center gap-4">
+                    <div className="flex flex-wrap justify-center gap-2 md:gap-4 w-full max-w-[360px] md:max-w-none">
                         {variants.map((variant, index) => (
                             console.log(`Thumbnail ${index}:`, variant.image, 'Selected:', selectedVariant === variant.id) ||
                             <div
                                 key={variant.id}
                                 onClick={() => handleVariantSelect(variant.id)}
-                                className={`w-[110px] h-[110px] backdrop-blur-[10px] border rounded-2xl shadow-lg flex items-center justify-center cursor-pointer transition-all duration-300 ${
+                                className={`w-[70px] h-[70px] md:w-[110px] md:h-[110px] backdrop-blur-[10px] border rounded-2xl shadow-lg flex items-center justify-center cursor-pointer transition-all duration-300 ${
                                     selectedVariant === variant.id
-                                        ? 'bg-white/30 border-white/40'
+                                        ? 'bg-white/30 border-white/40 scale-105 md:scale-100'
                                         : 'bg-black/40 border-white/20 hover:bg-black/50'
                                 }`}
                                 title={`${variant.name} - ${selectedProduct?.name || 'Premium Spice Blend'} Variant`}
@@ -108,7 +107,7 @@ const Buy = () => {
                                 <img
                                     src={variant.image}
                                     alt={`Omniblend ${variant.name} - ${selectedProduct?.name || 'Premium Spice Blend'} Variant`}
-                                    className="w-[80px] h-[80px] object-cover rounded-xl"
+                                    className="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-xl"
                                 />
                             </div>
                         ))}
@@ -116,73 +115,73 @@ const Buy = () => {
                 </div>
 
                 {/* Section 2 - Product Details */}
-                <div className="flex flex-col justify-start max-w-lg">
+                <div className="flex flex-col justify-start w-full max-w-lg px-4 md:px-0">
                     {/* Product Badges in Glassmorphism Box */}
-                    <div className="w-[200px] h-[50px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-center justify-center px-4 mb-4">
-                        <div className="flex gap-3">
+                    <div className="w-full max-w-[200px] h-[50px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-center justify-center px-4 mb-4 mx-auto md:mx-0">
+                        <div className="flex flex-wrap justify-center gap-1 md:gap-3">
                             {selectedProduct?.name === "Omniblend Original" ? (
                                 <>
-                                    <span className="px-3 py-1 bg-yellow-400/80 rounded-md text-white/70 text-xs font-bold uppercase tracking-wide">Signature</span>
-                                    <span className="px-2 py-1 bg-green-800/80 rounded-md text-xs text-white/70 font-bold uppercase tracking-wide">Premium</span>
+                                    <span className="px-3 py-1 bg-yellow-400/80 rounded-md text-white/70 text-[9px] md:text-[10px] font-bold uppercase tracking-wide">Signature</span>
+                                    <span className="px-2 py-1 bg-green-800/80 rounded-md text-[9px] md:text-[10px] text-white/70 font-bold uppercase tracking-wide">Premium</span>
                                 </>
                             ) : selectedProduct?.name === "Omniblend Mild" ? (
                                 <>
-                                    <span className="px-3 py-1 bg-green-800/80 rounded-md text-xs text-white/70 font-bold uppercase tracking-wide">Gentle</span>
-                                    <span className="px-2 py-1 bg-green-800/80 rounded-md text-xs text-white/70 font-bold uppercase tracking-wide">Premium</span>
+                                    <span className="px-3 py-1 bg-green-800/80 rounded-md text-[9px] md:text-[10px] text-white/70 font-bold uppercase tracking-wide">Gentle</span>
+                                    <span className="px-2 py-1 bg-green-800/80 rounded-md text-[9px] md:text-[10px] text-white/70 font-bold uppercase tracking-wide">Premium</span>
                                 </>
                             ) : selectedProduct?.name === "Omniblend Spicy" ? (
                                 <>
-                                    <span className="px-3 py-1 bg-red-800/80 rounded-md text-xs text-white/70 font-bold uppercase tracking-wide">Bold</span>
-                                    <span className="px-2 py-1 bg-green-800/80 rounded-md text-xs text-white/70 font-bold uppercase tracking-wide">Premium</span>
+                                    <span className="px-3 py-1 bg-red-800/80 rounded-md text-[9px] md:text-[10px] text-white/70 font-bold uppercase tracking-wide">Bold</span>
+                                    <span className="px-2 py-1 bg-green-800/80 rounded-md text-[9px] md:text-[10px] text-white/70 font-bold uppercase tracking-wide">Premium</span>
                                 </>
                             ) : (
                                 <>
-                                    <span className="px-3 py-1 bg-green-800/80 rounded-md text-xs text-white/70 font-bold uppercase tracking-wide">New</span>
-                                    <span className="px-2 py-1 bg-green-800/80 rounded-md text-xs text-white/70 font-bold uppercase tracking-wide">Premium</span>
+                                    <span className="px-3 py-1 bg-green-800/80 rounded-md text-[9px] md:text-[10px] text-white/70 font-bold uppercase tracking-wide">New</span>
+                                    <span className="px-2 py-1 bg-green-800/80 rounded-md text-[9px] md:text-[10px] text-white/70 font-bold uppercase tracking-wide">Premium</span>
                                 </>
                             )}
                         </div>
                     </div>
                     {/* Product Details in Glassmorphism Box */}
-                    <div className="w-[560px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg p-6 mb-4">
+                    <div className="w-full md:w-[560px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg p-4 md:p-6 mb-4">
                         <div className="flex flex-col">
-                            <h1 className="text-3xl lg:text-4xl font-bold mb-2 text-white">
+                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-white text-center md:text-left">
                                 Omniblend {selectedProduct?.name?.replace('Omniblend ', '') || variants[selectedVariant].name}
                                 {variants[selectedVariant].description && (
                                     <span className="text-lg font-normal text-gray-300"> - {variants[selectedVariant].description}</span>
                                 )}
                             </h1>
-                            <p className="text-white/70 font-semibold mb-4">Randall's Harvest Premium Spice Blend</p>
-                            <p className="lg:w-[497px] text-white/90 mb-8 text-sm lg:text-base leading-relaxed">
+                            <p className="text-white/70 font-semibold mb-4 text-center md:text-left">Randall's Harvest Premium Spice Blend</p>
+                            <p className="w-full lg:w-[497px] text-white/90 mb-6 md:mb-8 text-sm lg:text-base leading-relaxed text-center md:text-left">
                                 {selectedProduct?.name === "Omniblend Original"
                                     ? "Experience the signature flavor that started it all. Omniblend Original delivers the perfect balance of aromatic spices and earthy undertones, creating a versatile seasoning that enhances any dish. This carefully crafted blend combines traditional spices with modern flavor profiles, making it the ideal choice for both everyday cooking and gourmet experimentation."
                                     : selectedProduct?.name === "Omniblend Mild"
-                                    ? "Discover gentle flavor without compromise. Omniblend Mild offers a smooth, well-rounded taste that brings out the natural flavors of your ingredients with a comforting hint of warmth. Perfect for those who prefer subtle seasoning that enhances rather than overwhelms, this blend is ideal for soups, roasted vegetables, and light curries."
-                                    : selectedProduct?.name === "Omniblend Spicy"
-                                    ? "Ignite your taste buds with bold, unforgettable heat. Omniblend Spicy delivers a powerhouse of flavor with premium red chilies, smoked paprika, and handpicked peppercorns. This vibrant blend adds character and intensity to marinades, grilled meats, stir-fries, and hearty curries without overpowering the natural taste of your ingredients."
-                                    : `Experience the perfect harmony of flavors with Omniblend ${variants[selectedVariant].name}, our signature premium spice powder. Carefully crafted with a selection of the finest herbs and spices from around the world, this versatile blend elevates any dish with its complex, balanced profile. Each jar contains 100g of our proprietary blend, packaged to preserve freshness and flavor.`
+                                        ? "Discover gentle flavor without compromise. Omniblend Mild offers a smooth, well-rounded taste that brings out the natural flavors of your ingredients with a comforting hint of warmth. Perfect for those who prefer subtle seasoning that enhances rather than overwhelms, this blend is ideal for soups, roasted vegetables, and light curries."
+                                        : selectedProduct?.name === "Omniblend Spicy"
+                                            ? "Ignite your taste buds with bold, unforgettable heat. Omniblend Spicy delivers a powerhouse of flavor with premium red chilies, smoked paprika, and handpicked peppercorns. This vibrant blend adds character and intensity to marinades, grilled meats, stir-fries, and hearty curries without overpowering the natural taste of your ingredients."
+                                            : `Experience the perfect harmony of flavors with Omniblend ${variants[selectedVariant].name}, our signature premium spice powder. Carefully crafted with a selection of the finest herbs and spices from around the world, this versatile blend elevates any dish with its complex, balanced profile. Each jar contains 100g of our proprietary blend, packaged to preserve freshness and flavor.`
                                 }
                             </p>
-                            <p className="lg:w-[497px] text-white/70 mb-8 text-sm lg:text-base leading-relaxed">
+                            <p className="w-full lg:w-[497px] text-white/70 mb-6 md:mb-8 text-sm lg:text-base leading-relaxed text-center md:text-left">
                                 {selectedProduct?.name === "Omniblend Original"
                                     ? "100g | Signature Blend | Perfect Balance | All-Purpose |"
                                     : selectedProduct?.name === "Omniblend Mild"
-                                    ? "100g | Gentle Seasoning | Subtle Heat | Comforting |"
-                                    : selectedProduct?.name === "Omniblend Spicy"
-                                    ? "100g | Bold Seasoning | Premium Heat | Intense Flavor |"
-                                    : "85g | Gourmet Seasoning Blend | Dual Texture | No BS |"
+                                        ? "100g | Gentle Seasoning | Subtle Heat | Comforting |"
+                                        : selectedProduct?.name === "Omniblend Spicy"
+                                            ? "100g | Bold Seasoning | Premium Heat | Intense Flavor |"
+                                            : "85g | Gourmet Seasoning Blend | Dual Texture | No BS |"
                                 }
                             </p>
                         </div>
                     </div>
                     {/* Price in Glassmorphism Box */}
-                    <div className="w-[300px] p-4 mb-8">
+                    <div className="w-full md:w-[300px] p-4 mb-6 md:mb-8 flex justify-center md:justify-start">
                         <div className="bg-black/40 flex items-center justify-center w-[170px] h-[50px] backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg">
-                            <h2 className="text-2xl lg:text-3xl font-bold  text-white">₹ {totalPrice.toFixed(2)}</h2>
+                            <h2 className="text-2xl lg:text-3xl font-bold text-white">₹ {totalPrice.toFixed(2)}</h2>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center justify-center md:justify-start gap-4 mb-6">
                         <button
                             onClick={() => handleQuantityChange(quantity - 1)}
                             disabled={quantity <= 1}
@@ -208,24 +207,47 @@ const Buy = () => {
                         </button>
                     </div>
 
-                    <button className="w-[230px] h-[50px] flex items-center justify-center gap-2 px-6 py-3 bg-[#265B06] rounded-full font-semibold text-white shadow-lg hover:bg-[#38611F] hover:shadow-green-500/30 transition">
-                        {selectedProduct?.name === "Omniblend Original"
-                            ? "Add to Cart"
-                            : selectedProduct?.name === "Omniblend Mild"
-                            ? "Add to Cart"
-                            : selectedProduct?.name === "Omniblend Spicy"
-                            ? "Add to Cart"
-                            : "Add to Cart"
-                        } ₹ {totalPrice.toFixed(2)}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-cart" aria-hidden="true">
-                            <circle cx="8" cy="21" r="1"></circle>
-                            <circle cx="19" cy="21" r="1"></circle>
-                            <path d="m2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-                        </svg>
-                    </button>
+                    <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                        <button className="w-full md:w-[200px] h-[50px] flex items-center justify-center gap-2 px-6 py-3 bg-[#265B06] rounded-full font-semibold text-white shadow-lg hover:bg-[#38611F] hover:shadow-green-500/30 transition">
+                            {selectedProduct?.name === "Omniblend Original"
+                                ? "Add to Cart"
+                                : selectedProduct?.name === "Omniblend Mild"
+                                    ? "Add to Cart"
+                                    : selectedProduct?.name === "Omniblend Spicy"
+                                        ? "Add to Cart"
+                                        : "Add to Cart"
+                            } ₹ {totalPrice.toFixed(2)}
+                            <img
+                                src="/shopping-cart.png"
+                                alt="Amazon"
+                                className="w-5 h-5 object-contain"
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg';
+                                }}
+                            />
+                        </button>
+                        <a
+                            href="https://amzn.to/47IrNOr"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full md:w-[200px] h-[50px] flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 rounded-full font-semibold text-white shadow-lg hover:bg-[#e68a00] hover:shadow-amber-500/30 transition"
+                        >
+                            Buy from Amazon
+                            <img
+                                src="/amazon-icon.png"
+                                alt="Amazon"
+                                className="w-5 h-5 object-contain"
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg';
+                                }}
+                            />
+                        </a>
+                    </div>
 
                     {/* Product Info in Glassmorphism Box */}
-                    <div className="w-[450px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg p-4 mt-10 mb-14">
+                    <div className="w-full max-w-[450px] md:w-[450px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg p-4 mt-8 md:mt-10 mb-10 md:mb-14 mx-auto md:mx-0">
                         <div className="text-sm text-gray-400 py-2 space-y-2">
                             <div className="flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-truck" aria-hidden="true">
@@ -237,23 +259,23 @@ const Buy = () => {
                                 </svg>
                                 <span>Fast Delivery Available</span>
                             </div>
-                            <p><span className="font-semibold text-white">Category:</span> {
+                            <p className="text-center md:text-left"><span className="font-semibold text-white">Category:</span> {
                                 selectedProduct?.name === "Omniblend Original"
                                     ? "Signature Spices"
                                     : selectedProduct?.name === "Omniblend Mild"
-                                    ? "Gentle Seasonings"
-                                    : selectedProduct?.name === "Omniblend Spicy"
-                                    ? "Bold Spices"
-                                    : "Premium Spices"
+                                        ? "Gentle Seasonings"
+                                        : selectedProduct?.name === "Omniblend Spicy"
+                                            ? "Bold Spices"
+                                            : "Premium Spices"
                             }</p>
-                            <p><span className="font-semibold text-white">Tags:</span> {
+                            <p className="text-center md:text-left"><span className="font-semibold text-white">Tags:</span> {
                                 selectedProduct?.name === "Omniblend Original"
                                     ? "Signature, Balanced, All-Purpose, Premium"
                                     : selectedProduct?.name === "Omniblend Mild"
-                                    ? "Gentle, Subtle, Comforting, Premium"
-                                    : selectedProduct?.name === "Omniblend Spicy"
-                                    ? "Bold, Intense, Premium, Heat"
-                                    : "Organic, Gourmet, Artisanal"
+                                        ? "Gentle, Subtle, Comforting, Premium"
+                                        : selectedProduct?.name === "Omniblend Spicy"
+                                            ? "Bold, Intense, Premium, Heat"
+                                            : "Organic, Gourmet, Artisanal"
                             }</p>
                         </div>
                     </div>
