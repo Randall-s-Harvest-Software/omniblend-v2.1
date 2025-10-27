@@ -4,8 +4,6 @@ import { Instagram, Linkedin } from 'lucide-react';
 const Bottom = () => {
   return (
     <footer className="w-full bg-black py-2 px-8 md:px-4">
-      {/* White line separator at top */}
-      <div className="w-full h-px bg-white/20 my-1"></div>
       <div className="max-w-[1820px] mx-auto mb-6 flex flex-col md:flex-row items-start justify-between gap-8 md:gap-16 mt-3">
         {/* Left Side - Logo and Description */}
         <div className="flex flex-col items-start w-full md:w-auto mb-8 md:mb-0">
