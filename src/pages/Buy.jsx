@@ -79,9 +79,9 @@ const Buy = () => {
                 {/* Section 1 - Product Display */}
                 <div className="flex flex-col items-center w-full md:w-auto">
                     {/* Big Glassmorphism Box */}
-                    <div className="w-full max-w-[360px] md:w-[530px] h-[400px] md:h-[530px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-center justify-center p-4 md:p-6 mb-6 md:mb-8">
+                    <div className="w-[320px] max-w-[500px] md:w-[530px] h-[400px] md:h-[530px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-center justify-center p-4 md:p-6 mb-6 md:mb-8">
                         {/* Inner White Box */}
-                        <div className="w-full h-full max-w-[320px] md:w-[360px] md:h-[450px] bg-white rounded-2xl shadow-lg flex items-center justify-center overflow-hidden">
+                        <div className="w-full h-full max-w-[450px] md:w-[360px] md:h-[450px] bg-black rounded-2xl shadow-lg flex items-center justify-center overflow-hidden">
                             <img
                                 src={variants[selectedVariant].image}
                                 alt={`Omniblend ${variants[selectedVariant].name} - ${selectedProduct?.name || 'Premium Spice Blend'} Product`}
@@ -177,7 +177,7 @@ const Buy = () => {
                     {/* Price in Glassmorphism Box */}
                     <div className="w-full md:w-[300px] p-4 mb-6 md:mb-8 flex justify-center md:justify-start">
                         <div className="bg-black/40 flex items-center justify-center w-[170px] h-[50px] backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg">
-                            <h2 className="text-2xl lg:text-3xl font-bold text-white">₹ {totalPrice.toFixed(2)}</h2>
+                            <h2 className="text-2xl lg:text-3xl font-bold text-white">₹ 179.00</h2>
                         </div>
                     </div>
 
