@@ -111,7 +111,7 @@ const Contact = () => {
 
                     {/* Horizontal Line - Visible only on mobile */}
                     <div className="w-full h-[3px] bg-white/40 my-8 md:hidden"></div>
-                    
+
                     {/* Vertical Line Between Sections - Visible only on desktop */}
                     <div className="hidden md:flex items-center justify-center">
                         <div className="w-0.5 h-[445px] bg-white/40"></div>
@@ -187,9 +187,17 @@ const Contact = () => {
                             </div>
                         </div>
 
-                        {/* White Box - Hidden on mobile */}
-                        <div className=" w-full max-w-[300px] h-[125px] bg-white rounded-[10px] shadow-lg items-center justify-center mt-4 mx-auto">
-                            {/* Empty white box as specified */}
+                        <div className="w-full max-w-[300px] h-[125px] rounded-[10px] shadow-lg overflow-hidden mt-4 mx-auto">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.12345!2d77.5945669!3d12.9715987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzE3LjgiTiA3N8KwMzUnNDEuMyJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                title="Our Location"
+                            ></iframe>
                         </div>
                     </div>
                 </div>

@@ -48,8 +48,8 @@ const Products = () => {
             <div className="min-h-screen bg-black relative" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(/product.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
                 <Navbar />
                 <div className="pt-36 flex flex-col items-center justify-center min-h-screen px-4">
-                    <div className="w-full max-w-[630px] h-[60px] md:h-[80px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-center justify-center px-4 md:px-6">
-                        <h1 className="text-white font-pethra font-bold text-[32px] md:text-[52px] leading-tight text-center">
+                    <div className="w-full max-w-[90%] sm:max-w-[80%] md:max-w-[700px] h-auto min-h-[60px] md:min-h-[80px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-center justify-center p-4 md:p-6">
+                        <h1 className="text-white font-pethra font-bold text-[28px] sm:text-[36px] md:text-[48px] lg:text-[52px] leading-tight text-center">
                             No Products Available
                         </h1>
                     </div>
@@ -87,12 +87,12 @@ const Products = () => {
     };
 
     return (
-        <div 
-            className="min-h-screen bg-black relative" 
+        <div
+            className="min-h-screen bg-black relative"
             style={{
-                backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(/product.png)', 
-                backgroundSize: 'cover', 
-                backgroundPosition: 'center', 
+                backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(/product.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 backgroundAttachment: 'fixed'
             }}
@@ -102,7 +102,7 @@ const Products = () => {
 
             {/* Scroll Down Indicator - Bottom Right */}
             {showScrollIndicator && (
-                <div 
+                <div
                     className="fixed bottom-8 right-1 z-40 cursor-pointer animate-bounce"
                     onClick={scrollToProducts}
                 >
@@ -137,12 +137,12 @@ const Products = () => {
                         </div>
 
                         {/* Product Image */}
-                        <div className="w-full h-[300px] bg-black/20 rounded-2xl flex items-center justify-center p-2">
+                        <div className="w-full h-[340px] bg-black/20 rounded-2xl flex items-center justify-center p-2">
                             <div className="w-full h-full bg-white rounded-xl shadow-lg overflow-hidden">
                                 <img
                                     src={currentProduct.image}
                                     alt={`${currentProduct.name} Product`}
-                                    className="w-full h-full object-contain p-4"
+                                    className="w-full h-full object-contain p-2"
                                     onError={(e) => {
                                         e.target.src = '/default-product.svg';
                                     }}
@@ -266,7 +266,7 @@ const Products = () => {
                 <div className="md:hidden w-full px-4 mb-8">
                     <div
                         onClick={handleBuyNow}
-                        className="w-full h-[50px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-center justify-center cursor-pointer hover:bg-black/50 transition-all duration-300"
+                        className="w-full max-w-md lg:max-w-xl xl:max-w-2xl mx-auto bg-black/40 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-2xl"
                     >
                         <span className="text-white font-afacad font-semibold text-[18px]" style={{fontFamily: 'Afacad, sans-serif'}}>
                             Ready to buy...
