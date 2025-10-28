@@ -1,8 +1,15 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 import Bottom from "../components/Bottom.jsx";
+import { Play } from 'lucide-react';
 
 const Home = () => {
+    const navigate = useNavigate();
+    
+    const handleBuyNow = () => {
+        navigate('/products');
+    };
     return (
         <div className="min-h-screen bg-black relative" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.5)), url(/Home.webp)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
             {/* Navbar positioned 60px from top and centered */}
@@ -26,7 +33,10 @@ const Home = () => {
 
                         {/* Buy Now Button */}
                         <div className="flex justify-center lg:justify-start">
-                            <button className="w-full sm:w-1/2 bg-white text-black font-afacad font-semibold text-base sm:text-lg px-6 py-2 md:py-3 sm:px-8 sm:py-4 rounded-[20px] hover:bg-gray-100 transition-colors duration-300 shadow-lg">
+                            <button 
+                                onClick={handleBuyNow}
+                                className="w-full sm:w-1/2 bg-white text-black font-afacad font-semibold text-base sm:text-lg px-6 py-2 md:py-3 sm:px-8 sm:py-4 rounded-[20px] hover:bg-gray-100 transition-colors duration-300 shadow-lg cursor-pointer"
+                            >
                                 Buy Now
                             </button>
                         </div>
@@ -117,10 +127,43 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Right Side - White Box - Hidden on mobile, shown on lg and up */}
-                    <div className="hidden lg:flex lg:flex-shrink-0 w-full lg:w-1/2">
-                        <div className="w-full h-[400px] lg:h-[440px] bg-white/10 rounded-[10px] shadow-lg">
-                            {/* Empty white box as specified */}
+                    {/* Video Player - Visible on all screens */}
+                    <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
+                        <div className="w-full h-[250px] sm:h-[350px] md:h-[400px] lg:h-[440px] bg-black/80 rounded-[10px] shadow-lg relative overflow-hidden">
+                            {/* YouTube iframe with autoplay and mute */}
+                            <iframe
+                                id="youtube-video"
+                                className="w-full h-full"
+                                src="https://www.youtube.com/embed/VhZln5gCGF4?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=VhZln5gCGF4"
+                                title="Omniblend Video"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen>
+                            </iframe>
+                            
+                            {/* Play Button Overlay */}
+                            <div 
+                                className="absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer transition-opacity duration-300 hover:bg-black/40"
+                                onClick={() => {
+                                    const iframe = document.getElementById('youtube-video');
+                                    if (iframe) {
+                                        iframe.src = "https://www.youtube.com/embed/VhZln5gCGF4?autoplay=1&mute=0&controls=1&showinfo=0&rel=0";
+                                    }
+                                    const playButton = document.getElementById('play-button');
+                                    const playText = document.getElementById('play-text');
+                                    if (playButton) playButton.style.display = 'none';
+                                    if (playText) playText.style.display = 'none';
+                                }}
+                            >
+                                <div className="text-center">
+                                    <div id="play-button" className="flex justify-center mb-2">
+                                        <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:bg-white transition-all duration-300">
+                                            <Play className="w-6 h-6 sm:w-8 sm:h-8 text-black ml-1" fill="currentColor" />
+                                        </div>
+                                    </div>
+                                    <p id="play-text" className="text-white font-afacad text-base sm:text-lg font-medium mt-2 sm:mt-3">Watch Story</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -237,7 +280,7 @@ const Home = () => {
                         {/* Buy Now Button with Glassmorphism */}
                         <div className="bg-black/30 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg px-6 py-3">
                             <span className="text-white font-afacad font-semibold text-[18px]" style={{fontFamily: 'Afacad, sans-serif'}}>
-                                Buy Now - ₹499
+                                Buy Now - ₹179
                             </span>
                         </div>
                     </div>

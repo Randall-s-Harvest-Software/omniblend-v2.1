@@ -70,7 +70,7 @@ const Navbar = () => {
         </div>
       )}
 
-      <nav className={`w-full max-w-[340px] md:max-w-[1820px] h-[45px] md:h-[60px] flex items-center px-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-full shadow-2xl mx-auto fixed top-[30px] md:top-[40px] left-1/2 transform -translate-x-1/2 z-50 ${isAuthPage ? 'justify-center' : 'justify-between'}`}>
+      <nav className={`w-full max-w-[340px] md:max-w-[90%] lg:max-w-[85%] xl:max-w-[80%] 2xl:max-w-[70%] h-[45px] md:h-[60px] flex items-center px-4 sm:px-6 md:px-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-full shadow-2xl mx-auto fixed top-[20px] sm:top-[25px] md:top-[30px] left-1/2 transform -translate-x-1/2 z-50 ${isAuthPage ? 'justify-center' : 'justify-between'}`}>
       {/* Back Button - Only on Auth pages */}
       {isAuthPage && (
         <button
@@ -97,7 +97,7 @@ const Navbar = () => {
 
       {/* Desktop Navigation Links - Hidden on mobile and Auth pages */}
       {!isAuthPage && (
-        <div className="hidden md:flex items-center gap-[200px]">
+        <div className="hidden md:flex items-center gap-16 lg:gap-24 xl:gap-32 2xl:gap-40">
           <NavLink to="/home">Home</NavLink>
           <NavLink to="/products">Products</NavLink>
           <NavLink to="/about">About Us</NavLink>
