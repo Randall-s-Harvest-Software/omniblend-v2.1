@@ -111,7 +111,7 @@ const Contact = () => {
 
                     {/* Horizontal Line - Visible only on mobile */}
                     <div className="w-full h-[3px] bg-white/40 my-8 md:hidden"></div>
-                    
+
                     {/* Vertical Line Between Sections - Visible only on desktop */}
                     <div className="hidden md:flex items-center justify-center">
                         <div className="w-0.5 h-[445px] bg-white/40"></div>
