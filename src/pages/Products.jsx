@@ -87,12 +87,12 @@ const Products = () => {
     };
 
     return (
-        <div 
-            className="min-h-screen bg-black relative" 
+        <div
+            className="min-h-screen bg-black relative"
             style={{
-                backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(/product.png)', 
-                backgroundSize: 'cover', 
-                backgroundPosition: 'center', 
+                backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(/product.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 backgroundAttachment: 'fixed'
             }}
@@ -102,7 +102,7 @@ const Products = () => {
 
             {/* Scroll Down Indicator - Bottom Right */}
             {showScrollIndicator && (
-                <div 
+                <div
                     className="fixed bottom-8 right-1 z-40 cursor-pointer animate-bounce"
                     onClick={scrollToProducts}
                 >
