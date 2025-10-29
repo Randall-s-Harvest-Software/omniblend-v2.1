@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MoreHorizontal, X } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
@@ -7,6 +7,28 @@ const Landing = () => {
     const navigate = useNavigate();
     const [isExiting, setIsExiting] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+    useEffect(() => {
+        const img = new Image();
+        const imgSrc = window.innerWidth >= 640 ? '/homew.webp' : '/homem.webp';
+        
+        img.src = imgSrc;
+        img.onload = () => {
+            setIsImageLoaded(true);
+        };
+        
+        // Fallback in case the image fails to load
+        img.onerror = () => {
+            console.error(`Failed to load image: ${imgSrc}`);
+            setIsImageLoaded(true); // Continue without the loading state if image fails
+        };
+        
+        return () => {
+            img.onload = null;
+            img.onerror = null;
+        };
+    }, []);
 
     const handleReadyToBuy = useCallback(() => {
         if (isExiting) return;
@@ -17,10 +39,30 @@ const Landing = () => {
 
     return (
         <motion.section
-            className="min-h-screen w-full flex flex-col text-white relative overflow-hidden bg-[#571111] bg-cover bg-center bg-[url('/homem.webp')] sm:bg-[url('/homew.webp')]"
+            className="min-h-screen w-full flex flex-col text-white relative overflow-hidden bg-black"
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
         >
+            {/* Background Image with Loading */}
+            <div 
+                className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                style={{
+                    backgroundImage: `url(${window.innerWidth >= 640 ? '/homew.webp' : '/homem.webp'})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat'
+                }}
+            />
+            
+            {/* Loading Overlay */}
+            {!isImageLoaded && (
+                <div className="absolute inset-0 bg-black flex items-center justify-center z-10">
+                    <div className="animate-pulse flex flex-col items-center">
+                        <div className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        <p className="mt-4 text-white/80 text-sm font-michroma">Loading...</p>
+                    </div>
+                </div>
+            )}
             {/* Background Overlay */}
             <div className="absolute inset-0 pointer-events-none bg-black/15 z-0" />
 
