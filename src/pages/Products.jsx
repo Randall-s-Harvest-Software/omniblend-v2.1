@@ -5,6 +5,13 @@ import Bottom from '../components/Bottom.jsx';
 import { useProducts } from '../context/ProductContext';
 import { ChevronDown } from 'lucide-react';
 
+// Responsive container component
+const ResponsiveContainer = ({ children, className = '' }) => (
+  <div className={`w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+    {children}
+  </div>
+);
+
 const Products = () => {
     const navigate = useNavigate();
     const { getActiveProducts } = useProducts();

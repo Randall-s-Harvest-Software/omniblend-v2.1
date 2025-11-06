@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
-import Bottom from "../components/Bottom.jsx";
+import Bottom from "../components/Bottom.jsx"
 
 const Buy = () => {
     const location = useLocation();

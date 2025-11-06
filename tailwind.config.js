@@ -13,19 +13,24 @@ export default {
       'xl': '1280px',
       '2xl': '1536px',
       '3xl': '1920px',
-      '4xl': '2560px',
-      'asusscreen': '1366px', // Common resolution for 15.6" ASUS laptops
     },
     extend: {
-      keyframes: {
-        rotateOnce: {
-          "0%": { transform: "rotate(7deg)" },
-          "100%": { transform: "rotate(-7deg)" },
-        },
-        floatY: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-15px)" },
-        },
+      spacing: {
+        'screen': '100vw',
+        'full': '100%',
+      },
+      fontSize: {
+        'base': ['1rem', '1.5'],
+      },
+    keyframes: {
+      rotateOnce: {
+        "0%": { transform: "rotate(7deg)" },
+        "100%": { transform: "rotate(-7deg)" },
+      },
+      floatY: {
+        "0%, 100%": { transform: "translateY(0)" },
+        "50%": { transform: "translateY(-15px)" },
+      },
         zoomRotate: {
           "0%": { transform: "scale(0.8) rotate(0deg)", opacity: "0" },
           "100%": { transform: "scale(1) rotate(15deg)", opacity: "0.5" },

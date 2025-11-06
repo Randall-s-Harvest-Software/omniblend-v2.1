@@ -1,7 +1,14 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 import Bottom from "../components/Bottom.jsx";
+
+// Responsive container component
+const ResponsiveContainer = ({ children, className = '' }) => (
+  <div className={`w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+    {children}
+  </div>
+);
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -95,7 +102,7 @@ const Register = () => {
                             <div className="relative">
                                 <input
                                     placeholder="Create a Password"
-                                    className="w-full font-andika border-b border-gray-500 bg-transparent text-white placeholder-gray-400 px-2 py-2 focus:outline-none"
+                                    className="w-full px-4 py-2 sm:py-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                     type={showPassword ? "text" : "password"}
                                     name="password"
                                     value={formData.password}
@@ -105,7 +112,7 @@ const Register = () => {
                                 <button
                                     type="button"
                                     onClick={togglePasswordVisibility}
-                                    className="absolute font-andika right-2 top-2 text-gray-400 text-sm hover:text-white transition"
+                                    className="absolute font-andika right-2 top-2 text-gray-400 text-sm hover:text-gray-700 transition"
                                 >
                                     {showPassword ? "Hide" : "Show"}
                                 </button>
@@ -115,7 +122,7 @@ const Register = () => {
                             <div className="relative">
                                 <input
                                     placeholder="Confirm Password"
-                                    className="w-full font-andika border-b border-gray-500 bg-transparent text-white placeholder-gray-400 px-2 py-2 focus:outline-none"
+                                    className="w-full px-4 py-2 sm:py-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                     type={showConfirmPassword ? "text" : "password"}
                                     name="confirmPassword"
                                     value={formData.confirmPassword}
@@ -125,7 +132,7 @@ const Register = () => {
                                 <button
                                     type="button"
                                     onClick={toggleConfirmPasswordVisibility}
-                                    className="absolute font-andika right-2 top-2 text-gray-400 text-sm hover:text-white transition"
+                                    className="absolute font-andika right-2 top-2 text-gray-400 text-sm hover:text-gray-700 transition"
                                 >
                                     {showConfirmPassword ? "Hide" : "Show"}
                                 </button>
@@ -143,7 +150,7 @@ const Register = () => {
                         {/* Divider */}
                         <div className="flex items-center w-full mt-8 mb-6">
                             <div className="flex-1 h-px bg-gray-500"></div>
-                            <p className="mx-3 text-gray-300">OR</p>
+                            <p className="mx-3 text-gray-500">OR</p>
                             <div className="flex-1 h-px bg-gray-500"></div>
                         </div>
 

@@ -3,6 +3,13 @@ import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { MoreHorizontal, X } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 
+// Responsive container component
+const ResponsiveContainer = ({ children, className = '' }) => (
+  <div className={`w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+    {children}
+  </div>
+);
+
 const Landing = () => {
     const navigate = useNavigate();
     const [isExiting, setIsExiting] = useState(false);
@@ -243,7 +250,7 @@ const Landing = () => {
                             <motion.img
                                 src="/omniblend.png"
                                 alt="Landing"
-                                className="relative w-[250px] xs:w-[300px] sm:w-[330px] lg:w-[500px] top-24 xs:top-28 sm:top-32 h-auto z-20"
+                                className="relative w-[250px] xs:w-[300px] sm:w-[330px] lg:w-[460px] top-24 xs:top-28 sm:top-32 h-auto z-20"
                                 initial={{ y: '-50vh', opacity: 0, scale: 0.5 }}
                                 animate={{ 
                                     y: [0, -10, 0],
