@@ -14,32 +14,15 @@ import Register from "./pages/Register.jsx";
 import Admin from "./pages/Admin.jsx";
 import { ProductProvider } from "./context/ProductContext.jsx";
 
-// Wrapper component to handle page refresh and scroll to top
-const ForceRefresh = ({ children }) => {
-    const location = useLocation();
-    
+// Scroll to top on route change
+const ScrollToTop = () => {
+    const { pathname } = useLocation();
+
     useEffect(() => {
-        // Scroll to top on initial load
         window.scrollTo(0, 0);
-        
-        // Force full page refresh on route change
-        if (location.pathname !== window.location.pathname) {
-            window.location.href = location.pathname + window.location.search;
-        } else {
-            // If already on the same URL, just scroll to top
-            window.scrollTo(0, 0);
-        }
-    }, [location]);
+    }, [pathname]);
 
-    // Add scroll restoration to handle browser back/forward buttons
-    useEffect(() => {
-        window.history.scrollRestoration = 'manual';
-        return () => {
-            window.history.scrollRestoration = 'auto';
-        };
-    }, []);
-
-    return children;
+    return null;
 };
 
 const App = () => {
@@ -54,19 +37,19 @@ const App = () => {
     return (
         <ProductProvider>
             <Router>
-                <ForceRefresh>
-                    <Routes>
-                        <Route path="/" element={<Landing />} />
-                        <Route path="/home" element={<Home />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/contact" element={<Contact />} />
-                        <Route path="/products" element={<Products />} />
-                        <Route path="/buy" element={<Buy />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/admin" element={<Admin />} />
-                    </Routes>
-                </ForceRefresh>
+                <ScrollToTop />
+                <Routes>
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/buy" element={<Buy />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/admin" element={<Admin />} />
+                    <Route path="*" element={<Landing />} />
+                </Routes>
             </Router>
         </ProductProvider>
     );
