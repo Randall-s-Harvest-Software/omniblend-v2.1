@@ -1,6 +1,13 @@
-import React, { useState } from 'react'
-import Navbar from '../components/Navbar'
+import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
 import Bottom from "../components/Bottom.jsx";
+
+// Responsive container component
+const ResponsiveContainer = ({ children, className = '' }) => (
+  <div className={`w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+    {children}
+  </div>
+);
 
 const Contact = () => {
     // Form state management

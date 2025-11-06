@@ -1,7 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react'
-import Navbar from '../components/Navbar'
+import React, { useState, useEffect, useRef } from 'react';
+import Navbar from '../components/Navbar';
 import Bottom from "../components/Bottom.jsx";
 import { motion, useInView } from 'framer-motion';
+
+// Responsive container component
+const ResponsiveContainer = ({ children, className = '' }) => (
+  <div className={`w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+    {children}
+  </div>
+);
 
 const About = () => {
     const aboutRef = useRef(null);
