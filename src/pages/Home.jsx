@@ -1,14 +1,79 @@
-import React from 'react'; // removed { useState }
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Bottom from "../components/Bottom.jsx";
 import { Play } from 'lucide-react';
+import { motion, useAnimation, useInView } from 'framer-motion';
 
 const Home = () => {
     const navigate = useNavigate();
+    const controls = useAnimation();
+    const headingRef = useRef(null);
+    const descRef = useRef(null);
+    const buttonRef = useRef(null);
+    const box1Ref = useRef(null);
+    const box2Ref = useRef(null);
+    const box3Ref = useRef(null);
+    
+    const isInViewHeading = useInView(headingRef, { once: true });
+    const isInViewDesc = useInView(descRef, { once: true, margin: "-20% 0px" });
+    const isInViewButton = useInView(buttonRef, { once: true, margin: "-10% 0px" });
+    const isInViewBox1 = useInView(box1Ref, { once: true, margin: "-10% 0px" });
+    const isInViewBox2 = useInView(box2Ref, { once: true, margin: "-10% 0px" });
+    const isInViewBox3 = useInView(box3Ref, { once: true, margin: "-10% 0px" });
+    const storyRef = useRef(null);
+    const subtitleRef = useRef(null);
+    const featureBox1Ref = useRef(null);
+    const featureBox2Ref = useRef(null);
+    const featureBox3Ref = useRef(null);
+    
+    const isInViewStory = useInView(storyRef, { once: true, margin: "-10% 0px" });
+    const isInViewSubtitle = useInView(subtitleRef, { once: true, margin: "-10% 0px" });
+    const isInViewFeatureBox1 = useInView(featureBox1Ref, { once: true, margin: "-10% 0px" });
+    const isInViewFeatureBox2 = useInView(featureBox2Ref, { once: true, margin: "-10% 0px" });
+    const isInViewFeatureBox3 = useInView(featureBox3Ref, { once: true, margin: "-10% 0px" });
+    const glassmorphismBoxRef = useRef(null);
+    const isInViewGlassmorphism = useInView(glassmorphismBoxRef, { once: true, margin: "-10% 0px" });
+    
+    // Text for typing animations
+    const storyText = "Discover how Omniblend brings together the essence of pure, handpicked spices — blended to perfection for a balanced burst of flavor in every dish.";
+    const subtitleText = "A handcrafted fusion of organic ingredients and timeless expertise — taste purity redefined.";
+    const mealDescriptionText = "Elevate your meals with Omniblend — a dual-texture gourmet seasoning crafted from the world's finest spices. Perfectly balanced, naturally pure, and beautifully packaged for those who savor quality.";
+    
     const handleBuyNow = () => {
         navigate('/products');
     };
+
+    useEffect(() => {
+        // Start the drop animation
+        controls.start({
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            transition: {
+                type: "spring",
+                damping: 10,
+                stiffness: 100,
+                mass: 1,
+                delay: 0.1
+            }
+        }).then(() => {
+            // After drop animation completes, start the bounce animation
+            controls.start({
+                y: [0, -15, 0],
+                transition: {
+                    y: {
+                        duration: 2,
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        times: [0, 0.5, 1],
+                        delay: 0.1
+                    }
+                }
+            });
+        });
+    }, [controls]);
     return (
         <div className="min-h-screen bg-black relative" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.5)), url(/Home.webp)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
             {/* Navbar positioned 60px from top and centered */}
@@ -21,45 +86,73 @@ const Home = () => {
                     {/* Left Side Content */}
                     <div className="w-full lg:w-1/2 flex flex-col justify-center lg:pr-4 xl:pr-8 relative lg:left-0 lg:transform-none">
                         {/* Main Heading */}
-                        <h1 className="text-white font-pethra text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[100px] leading-tight mb-4 sm:mb-6 md:mb-8 text-center lg:text-left">
+                        <motion.h1 
+                            ref={headingRef}
+                            initial={{ x: -50, opacity: 0 }}
+                            animate={isInViewHeading ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="text-white font-pethra text-[40px] sm:text-6xl md:text-7xl lg:text-8xl xl:text-[100px] leading-tight mb-4 sm:mb-6 md:mb-8 text-center lg:text-left"
+                        >
                             One Blend.<br className="hidden sm:block" /> Endless Flavors.
-                        </h1>
+                        </motion.h1>
 
                         {/* Description */}
-                        <p className="text-white font-afacad font-normal text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[26px] leading-relaxed mb-6 sm:mb-8 md:mb-10 lg:mb-12 max-w-full lg:max-w-[730px] text-center lg:text-left">
+                        <motion.p 
+                            ref={descRef}
+                            initial={{ x: -50, opacity: 0 }}
+                            animate={isInViewDesc ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                            className="text-white font-afacad font-normal text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[26px] leading-relaxed mb-6 sm:mb-8 md:mb-10 lg:mb-12 max-w-full lg:max-w-[730px] text-center lg:text-left"
+                        >
                             Omniblend is a gourmet seasoning crafted from the finest natural ingredients, designed to add depth and richness to any dish. Whether it's a quick snack or a festive meal, one spoonful transforms your cooking into a flavorful experience.
-                        </p>
+                        </motion.p>
 
                         {/* Buy Now Button */}
-                        <div className="flex justify-center lg:justify-start">
-                            <button
+                        <motion.div 
+                            ref={buttonRef}
+                            initial={{ x: -50, opacity: 0 }}
+                            animate={isInViewButton ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                            className="flex justify-center lg:justify-start"
+                        >
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
                                 onClick={handleBuyNow}
-                                className="w-full sm:w-1/2 bg-white text-black font-afacad font-semibold text-base sm:text-lg px-6 py-2 md:py-3 sm:px-8 sm:py-4 rounded-[20px] hover:bg-gray-100 transition-colors duration-300 shadow-lg cursor-pointer"
+                                className="w-full sm:w-1/2 bg-white text-black font-afacad font-semibold text-[14px] sm:text-lg px-6 py-2 md:py-3 sm:px-8 sm:py-4 rounded-[20px] hover:bg-gray-100 transition-colors duration-300 shadow-lg cursor-pointer"
                             >
                                 Buy Now
-                            </button>
-                        </div>
+                            </motion.button>
+                        </motion.div>
                     </div>
 
                     {/* Right Side Image - Hidden on mobile, shown on md and up */}
-                    <div className="hidden lg:flex lg:w-1/2 justify-center items-center mt-12 lg:mt-0 lg:relative lg:right-0 xl:right-[100px]">
+                    <motion.div 
+                        initial={{ y: -50, opacity: 0, scale: 0.8 }}
+                        animate={controls}
+                        className="hidden lg:flex lg:w-1/2 justify-center items-center mt-12 lg:mt-0 lg:relative lg:right-0 xl:right-[100px]"
+                    >
                         <img
                             src="/omniblend.png"
                             alt="Omniblend Product"
                             className="w-full max-w-[500px] xl:max-w-[600px] h-auto transform rotate-[-7deg] drop-shadow-2xl"
                             loading="lazy"
                         />
-                    </div>
+                    </motion.div>
 
                     {/* Small product image for mobile */}
-                    <div className="lg:hidden w-full flex justify-center items-center mt-8">
+                    <motion.div 
+                        initial={{ y: -50, opacity: 0, scale: 0.8 }}
+                        animate={controls}
+                        className="lg:hidden w-full flex justify-center items-center mt-8"
+                    >
                         <img
                             src="/omniblend.png"
                             alt="Omniblend Product"
-                            className="w-2/3 max-w-[300px] h-auto transform rotate-[-7deg] drop-shadow-2xl"
+                            className="w-[250px] max-w-[300px] h-auto transform rotate-[-7deg] drop-shadow-2xl"
                             loading="lazy"
                         />
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 
@@ -75,9 +168,32 @@ const Home = () => {
                         </div>
 
                         {/* Right Side - Description */}
-                        <div className="w-full lg:flex-1 lg:max-w-[574px]">
+                        <div ref={storyRef} className="w-full lg:flex-1 lg:max-w-[574px] relative">
                             <p className="text-white font-afacad font-normal text-lg sm:text-xl md:text-2xl lg:text-[24px] leading-relaxed text-center lg:text-left" style={{fontFamily: 'Afacad, sans-serif'}}>
-                                Discover how Omniblend brings together the essence of pure, handpicked spices — blended to perfection for a balanced burst of flavor in every dish.
+                                {isInViewStory ? (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.5 }}
+                                        style={{ position: 'relative' }}
+                                    >
+                                        {storyText.split('').map((char, index) => (
+                                            <motion.span
+                                                key={index}
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{
+                                                    duration: 0.1,
+                                                    delay: index * 0.03,
+                                                }}
+                                            >
+                                                {char}
+                                            </motion.span>
+                                        ))}
+                                    </motion.div>
+                                ) : (
+                                    storyText
+                                )}
                             </p>
                         </div>
                     </div>
@@ -90,7 +206,13 @@ const Home = () => {
                         {/* Left Side - 3 Glassmorphism Boxes */}
                         <div className="w-full lg:flex-1 flex flex-col gap-4 sm:gap-6">
                             {/* Box 1 - 100% Natural */}
-                            <div className="w-full sm:w-[500px] lg:w-full h-auto sm:h-[130px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-start justify-start p-4 sm:px-6 sm:py-4">
+                            <motion.div 
+                                ref={box1Ref}
+                                initial={{ y: 30, opacity: 0 }}
+                                animate={isInViewBox1 ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
+                                transition={{ duration: 0.6, ease: "easeOut" }}
+                                className="w-full sm:w-[500px] lg:w-full h-auto sm:h-[130px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-start justify-start p-4 sm:px-6 sm:py-4"
+                            >
                                 <div className="flex flex-col sm:flex-row items-start">
                                     <h3 className="text-white font-afacad font-semibold text-xl sm:text-[24px] w-full sm:w-[100px] text-left mb-2 sm:mb-0">
                                         100% Natural
@@ -99,10 +221,16 @@ const Home = () => {
                                         No preservatives, no artificial colors — only pure, natural ingredients blended to perfection for authentic flavor.
                                     </p>
                                 </div>
-                            </div>
+                            </motion.div>
 
                             {/* Box 2 - 10 Handpicked Spices */}
-                            <div className="w-full sm:w-[500px] lg:w-full h-auto sm:h-[130px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-start justify-start p-4 sm:px-6 sm:py-4">
+                            <motion.div 
+                                ref={box2Ref}
+                                initial={{ y: 30, opacity: 0 }}
+                                animate={isInViewBox2 ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
+                                transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+                                className="w-full sm:w-[500px] lg:w-full h-auto sm:h-[130px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-start justify-start p-4 sm:px-6 sm:py-4"
+                            >
                                 <div className="flex flex-col sm:flex-row items-start">
                                     <h3 className="text-white font-afacad font-semibold text-xl sm:text-[26px] w-full sm:w-[142px] text-left mb-2 sm:mb-0">
                                         10 Handpicked Spices
@@ -111,10 +239,16 @@ const Home = () => {
                                         Hand-selected from India's elite spice estates — where tradition, quality, and authenticity come together to create the perfect blend.
                                     </p>
                                 </div>
-                            </div>
+                            </motion.div>
 
                             {/* Box 3 - Crafted with Care */}
-                            <div className="w-full sm:w-[500px] lg:w-full h-auto sm:h-[130px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-start justify-start p-4 sm:px-6 sm:py-4">
+                            <motion.div 
+                                ref={box3Ref}
+                                initial={{ y: 30, opacity: 0 }}
+                                animate={isInViewBox3 ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
+                                transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                                className="w-full sm:w-[500px] lg:w-full h-auto sm:h-[130px] bg-black/40 backdrop-blur-[10px] border border-white/20 rounded-2xl shadow-lg flex items-start justify-start p-4 sm:px-6 sm:py-4"
+                            >
                                 <div className="flex flex-col sm:flex-row items-start">
                                     <h3 className="text-white font-afacad font-semibold text-xl sm:text-[24px] w-full sm:w-[153px] text-left mb-2 sm:mb-0">
                                         Crafted with Care
@@ -123,7 +257,7 @@ const Home = () => {
                                         Prepared in limited batches to maintain peak freshness and quality, so every blend reaches you at its most flavorful.
                                     </p>
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
 
                         {/* Video Player - Visible on all screens */}
@@ -179,9 +313,34 @@ const Home = () => {
                         </h2>
 
                         {/* Subtitle */}
-                        <p className="text-white font-afacad font-normal text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed mb-12 md:mb-16 lg:mb-20 max-w-full sm:max-w-[90%] md:max-w-[900px]" style={{fontFamily: 'Afacad, sans-serif'}}>
-                            A handcrafted fusion of organic ingredients and timeless expertise — taste purity redefined.
-                        </p>
+                        <div ref={subtitleRef} className="w-full">
+                            <p className="text-white font-afacad font-normal text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed mb-12 md:mb-16 lg:mb-20 max-w-full sm:max-w-[90%] md:max-w-[900px] mx-auto" style={{fontFamily: 'Afacad, sans-serif'}}>
+                                {isInViewSubtitle ? (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.5 }}
+                                        style={{ position: 'relative' }}
+                                    >
+                                        {subtitleText.split('').map((char, index) => (
+                                            <motion.span
+                                                key={index}
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{
+                                                    duration: 0.1,
+                                                    delay: index * 0.02, // Slightly faster than story text
+                                                }}
+                                            >
+                                                {char}
+                                            </motion.span>
+                                        ))}
+                                    </motion.div>
+                                ) : (
+                                    subtitleText
+                                )}
+                            </p>
+                        </div>
 
                         {/* Buy Now Button with Glassmorphism */}
                         <div className="bg-black/30 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg px-6 py-3 mb-12">
@@ -197,64 +356,127 @@ const Home = () => {
                         {/* 3 Glassmorphism Boxes */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12 w-full max-w-7xl px-4">
                             {/* Box 1 - 100% Natural */}
-                            <div className="w-full h-auto min-h-[300px] sm:min-h-[350px] md:h-[400px] bg-black/40 backdrop-blur-[8px] border border-white/20 rounded-3xl shadow-lg flex flex-col items-center justify-start p-6 sm:p-8">
+                            <motion.div 
+                                ref={featureBox1Ref}
+                                initial={{ y: 30, opacity: 0 }}
+                                animate={isInViewFeatureBox1 ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
+                                transition={{ duration: 0.6, ease: "easeOut" }}
+                                className="w-full h-auto min-h-[300px] sm:min-h-[350px] md:h-[400px] bg-black/40 backdrop-blur-[8px] border border-white/20 rounded-3xl shadow-lg flex flex-col items-center justify-start p-6 sm:p-8"
+                            >
                                 {/* Icon */}
-                                <div className="mb-6 sm:mb-8 md:mb-10 mt-2 sm:mt-5">
+                                <motion.div 
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={isInViewFeatureBox1 ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
+                                    transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                                    className="mb-6 sm:mb-8 md:mb-10 mt-2 sm:mt-5"
+                                >
                                     <svg className="w-12 h-12 sm:w-[50px] sm:h-[50px] md:w-[60px] md:h-[60px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                                     </svg>
-                                </div>
+                                </motion.div>
 
                                 {/* Title */}
-                                <h3 className="text-white font-afacad font-semibold text-xl sm:text-2xl md:text-[26px] mb-4 sm:mb-6 md:mb-8 text-center">
+                                <motion.h3 
+                                    initial={{ y: 10, opacity: 0 }}
+                                    animate={isInViewFeatureBox1 ? { y: 0, opacity: 1 } : { y: 10, opacity: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+                                    className="text-white font-afacad font-semibold text-xl sm:text-2xl md:text-[26px] mb-4 sm:mb-6 md:mb-8 text-center"
+                                >
                                     100% Natural
-                                </h3>
+                                </motion.h3>
 
                                 {/* Description */}
-                                <p className="text-white font-afacad font-normal text-base sm:text-lg md:text-[20px] leading-relaxed max-w-full text-center opacity-80">
-                                    Sourced from the finest organic farms around the world, free from additives and preservatives.
-                                </p>
-                            </div>
+                                <motion.p 
+                                    initial={{ y: 10, opacity: 0 }}
+                                    animate={isInViewFeatureBox1 ? { y: 0, opacity: 0.8 } : { y: 10, opacity: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+                                    className="text-white font-afacad font-normal text-base sm:text-lg md:text-[20px] leading-relaxed max-w-full text-center"
+                                >
+                                    Made with pure, organic ingredients sourced from sustainable farms for maximum freshness and flavor.
+                                </motion.p>
+                            </motion.div>
 
                             {/* Box 2 - Expertly Crafted */}
-                            <div className="w-full h-auto min-h-[300px] sm:min-h-[350px] md:h-[400px] bg-black/40 backdrop-blur-[8px] border border-white/20 rounded-3xl shadow-lg flex flex-col items-center justify-start p-6 sm:p-8">
+                            <motion.div 
+                                ref={featureBox2Ref}
+                                initial={{ y: 30, opacity: 0 }}
+                                animate={isInViewFeatureBox2 ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
+                                transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+                                className="w-full h-auto min-h-[300px] sm:min-h-[350px] md:h-[400px] bg-black/40 backdrop-blur-[8px] border border-white/20 rounded-3xl shadow-lg flex flex-col items-center justify-start p-6 sm:p-8"
+                            >
                                 {/* Icon */}
-                                <div className="mb-6 sm:mb-8 md:mb-10 mt-2 sm:mt-5">
+                                <motion.div 
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={isInViewFeatureBox2 ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
+                                    transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                                    className="mb-6 sm:mb-8 md:mb-10 mt-2 sm:mt-5"
+                                >
                                     <svg className="w-12 h-12 sm:w-[50px] sm:h-[50px] md:w-[60px] md:h-[60px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                                     </svg>
-                                </div>
+                                </motion.div>
 
                                 {/* Title */}
-                                <h3 className="text-white font-afacad font-semibold text-xl sm:text-2xl md:text-[26px] mb-4 sm:mb-6 md:mb-8 text-center">
+                                <motion.h3 
+                                    initial={{ y: 10, opacity: 0 }}
+                                    animate={isInViewFeatureBox2 ? { y: 0, opacity: 1 } : { y: 10, opacity: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+                                    className="text-white font-afacad font-semibold text-xl sm:text-2xl md:text-[26px] mb-4 sm:mb-6 md:mb-8 text-center"
+                                >
                                     Expertly Crafted
-                                </h3>
+                                </motion.h3>
 
                                 {/* Description */}
-                                <p className="text-white font-afacad font-normal text-base sm:text-lg md:text-[20px] leading-relaxed max-w-full text-center opacity-80">
+                                <motion.p 
+                                    initial={{ y: 10, opacity: 0 }}
+                                    animate={isInViewFeatureBox2 ? { y: 0, opacity: 0.8 } : { y: 10, opacity: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+                                    className="text-white font-afacad font-normal text-base sm:text-lg md:text-[20px] leading-relaxed max-w-full text-center"
+                                >
                                     Blended by master herbalists with decades of experience in flavor profiling.
-                                </p>
-                            </div>
+                                </motion.p>
+                            </motion.div>
 
                             {/* Box 3 - Health Benefits */}
-                            <div className="w-full h-auto min-h-[300px] sm:min-h-[350px] md:h-[400px] bg-black/40 backdrop-blur-[8px] border border-white/20 rounded-3xl shadow-lg flex flex-col items-center justify-start p-6 sm:p-8 md:col-span-2 lg:col-span-1">
+                            <motion.div 
+                                ref={featureBox3Ref}
+                                initial={{ y: 30, opacity: 0 }}
+                                animate={isInViewFeatureBox3 ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
+                                transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                                className="w-full h-auto min-h-[300px] sm:min-h-[350px] md:h-[400px] bg-black/40 backdrop-blur-[8px] border border-white/20 rounded-3xl shadow-lg flex flex-col items-center justify-start p-6 sm:p-8 md:col-span-2 lg:col-span-1"
+                            >
                                 {/* Icon */}
-                                <div className="mb-6 sm:mb-8 md:mb-10 mt-2 sm:mt-5">
+                                <motion.div 
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={isInViewFeatureBox3 ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
+                                    transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                                    className="mb-6 sm:mb-8 md:mb-10 mt-2 sm:mt-5"
+                                >
                                     <svg className="w-12 h-12 sm:w-[50px] sm:h-[50px] md:w-[60px] md:h-[60px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                     </svg>
-                                </div>
+                                </motion.div>
 
                                 {/* Title */}
-                                <h3 className="text-white font-afacad font-semibold text-xl sm:text-2xl md:text-[26px] mb-4 sm:mb-6 md:mb-8 text-center">
+                                <motion.h3 
+                                    initial={{ y: 10, opacity: 0 }}
+                                    animate={isInViewFeatureBox3 ? { y: 0, opacity: 1 } : { y: 10, opacity: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+                                    className="text-white font-afacad font-semibold text-xl sm:text-2xl md:text-[26px] mb-4 sm:mb-6 md:mb-8 text-center"
+                                >
                                     Health Benefits
-                                </h3>
+                                </motion.h3>
 
                                 {/* Description */}
-                                <p className="text-white font-afacad font-normal text-base sm:text-lg md:text-[20px] leading-relaxed max-w-full text-center opacity-80">
+                                <motion.p 
+                                    initial={{ y: 10, opacity: 0 }}
+                                    animate={isInViewFeatureBox3 ? { y: 0, opacity: 0.8 } : { y: 10, opacity: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
+                                    className="text-white font-afacad font-normal text-base sm:text-lg md:text-[20px] leading-relaxed max-w-full text-center"
+                                >
                                     Packed with antioxidants and nutrients that support overall wellness and immunity.
-                                </p>
-                            </div>
+                                </motion.p>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
@@ -262,32 +484,74 @@ const Home = () => {
 
                 {/* Elevate Every Meal Section */}
                 <div className="py-12 md:py-20 flex justify-center items-center px-4 sm:px-6">
-                    <div className="w-full max-w-[1820px] flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 xl:gap-24">
-                        {/* Left Side - Glassmorphism Box with White Box Inside - Hidden on mobile, shown on lg and up */}
-                        <div className="hidden lg:flex justify-center items-center w-full lg:w-1/2">
-                            <div className="w-full max-w-[415px] h-[400px] md:h-[480px] bg-black/40 backdrop-blur-[8px] border border-white/20 rounded-3xl shadow-2xl flex items-center justify-center">
+                    <div className="w-full max-w-[1820px] flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12 lg:gap-16 xl:gap-24">
+                        {/* Left Side - Glassmorphism Box with White Box Inside - Shown on all screens */}
+                        <motion.div 
+                            ref={glassmorphismBoxRef}
+                            initial={{ y: 50, opacity: 0 }}
+                            animate={isInViewGlassmorphism ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="flex justify-center items-center w-full lg:w-1/2 mb-8 lg:mb-0"
+                        >
+                            <motion.div 
+                                initial={{ scale: 0.95, opacity: 0 }}
+                                animate={isInViewGlassmorphism ? { scale: 1, opacity: 1 } : { scale: 0.95, opacity: 0 }}
+                                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                                className="w-full max-w-[300px] sm:max-w-[350px] md:max-w-[415px] h-[300px] sm:h-[350px] md:h-[400px] lg:h-[480px] bg-black/40 backdrop-blur-[8px] border border-white/20 rounded-3xl shadow-2xl flex items-center justify-center"
+                            >
                                 {/* White Box Inside */}
-                                <div className="w-[355px] h-[415px] bg-white rounded-2xl shadow-lg flex items-center justify-center overflow-hidden">
-                                    <img
+                                <motion.div 
+                                    initial={{ scale: 0.9, opacity: 0 }}
+                                    animate={isInViewGlassmorphism ? { scale: 1, opacity: 1 } : { scale: 0.9, opacity: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                                    className="w-[260px] sm:w-[310px] md:w-[355px] h-[270px] sm:h-[360px] md:h-[415px] bg-black rounded-2xl shadow-lg flex items-center justify-center overflow-hidden"
+                                >
+                                    <motion.img
+                                        initial={{ scale: 0.8, opacity: 0 }}
+                                        animate={isInViewGlassmorphism ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
+                                        transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
                                         src="/homeproduct.webp"
                                         alt="Omniblend Product Display"
-                                        className="w-[380px] h-auto object-contain transform drop-shadow-xl"
+                                        className="w-full max-w-[280px] sm:max-w-[330px] md:max-w-[380px] h-auto object-contain transform drop-shadow-xl"
                                     />
-                                </div>
-                            </div>
-                        </div>
+                                </motion.div>
+                            </motion.div>
+                        </motion.div>
 
                         {/* Right Side - Text Content */}
-                        <div className="flex flex-col items-start max-w-[800px]">
+                        <div className="flex flex-col items-center lg:items-start max-w-[800px] text-center lg:text-left">
                             {/* Main Title */}
                             <h2 className="text-white font-pethra font-bold text-[44px] leading-tight mb-6">
                                 Elevate Every Meal with Omniblend
                             </h2>
 
                             {/* Description */}
-                            <p className="text-white font-afacad font-normal text-[24px] leading-relaxed mb-8 max-w-[725px]" style={{fontFamily: 'Afacad, sans-serif'}}>
-                                Elevate your meals with Omniblend — a dual-texture gourmet seasoning crafted from the world's finest spices. Perfectly balanced, naturally pure, and beautifully packaged for those who savor quality.
-                            </p>
+                            <div className="text-white font-afacad font-normal text-[24px] leading-relaxed mb-8 max-w-[725px] min-h-[180px] sm:min-h-[160px] md:min-h-[140px]" style={{fontFamily: 'Afacad, sans-serif'}}>
+                                {isInViewGlassmorphism ? (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.5 }}
+                                        className="whitespace-pre-line"
+                                    >
+                                        {mealDescriptionText.split('').map((char, index) => (
+                                            <motion.span
+                                                key={index}
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{
+                                                    duration: 0.05,
+                                                    delay: index * 0.03,
+                                                }}
+                                            >
+                                                {char}
+                                            </motion.span>
+                                        ))}
+                                    </motion.div>
+                                ) : (
+                                    <span className="opacity-0">{mealDescriptionText}</span>
+                                )}
+                            </div>
 
                             {/* Buy Now Button with Glassmorphism */}
                             <div className="bg-black/30 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg px-6 py-3">

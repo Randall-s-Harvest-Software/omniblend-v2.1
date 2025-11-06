@@ -137,7 +137,7 @@ const Products = () => {
                         </div>
 
                         <div className="w-full h-[340px] bg-black/20 rounded-2xl flex items-center justify-center p-2">
-                            <div className="w-full h-full bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div className="w-full h-full bg-black rounded-xl shadow-lg overflow-hidden">
                                 <img
                                     src={currentProduct.image}
                                     alt={`${currentProduct.name} Product`}
